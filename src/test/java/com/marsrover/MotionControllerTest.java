@@ -27,4 +27,31 @@ class MotionControllerTest {
         MotionController motionControllerRover1 = new MotionController(plateau, rover1);
         Assertions.assertFalse(motionControllerRover1.isRoverPositionInBounds(plateau, rover1), "Rover cannot be out of the Plateau");
     }
+
+    @Test
+    @DisplayName("returns error message")
+    public void testInvalidInstructions() {
+        Plateau plateau = new Plateau(5,5);
+        Rover rover = new Rover(3,3,'E');
+        String roverInstruction = "ABCDEFGH";
+        Rover rover1Expected = new Rover(5,1,'E');
+        Assertions.assertThrows(Exception.class, () -> {
+            MotionController motionControllerRover = new MotionController(plateau, rover);
+            Rover rover1Final = motionControllerRover.executeInstruction(roverInstruction);
+
+        });
+    }
+
+    /*@Test
+    @DisplayName("returns error message")
+    public void testValidInstructions() {
+        Plateau plateau = new Plateau(5,5);
+        Rover rover = new Rover(3,3,'E');
+        String roverInstruction = "LMLMLM";
+        Rover rover1Expected = new Rover(5,1,'E');
+        Assertions.assertThrows(Exception.class, () -> {
+            MotionController motionControllerRover = new MotionController(plateau, rover);
+            Rover rover1Final = motionControllerRover.executeInstruction(roverInstruction);
+        });
+    }*/
 }
