@@ -38,6 +38,13 @@ public class MotionController {
             if (!isInstructionValid(instruction)) {
                 throw new IllegalArgumentException("Invalid instruction");
             }
+            for(int i = 0; i < instruction.length(); i++) {
+                if (instruction.charAt(i) == 'L') {
+                    if (rover.getOrientation() == 'N') {
+                        rover.setOrientation('W');
+                    }
+                }
+            }
         }
         return rover;
     }
