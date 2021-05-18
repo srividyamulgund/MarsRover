@@ -60,6 +60,9 @@ public class MotionController {
                     else if(rover.getOrientation()=='W'){
                         rover.setOrientation('N');
                     }
+                    else if(rover.getOrientation()=='S'){
+                        rover.setOrientation('W');
+                    }
                 }
             }
         }
