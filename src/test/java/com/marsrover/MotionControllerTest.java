@@ -267,4 +267,21 @@ class MotionControllerTest {
             fail(ex.getMessage());
         }
     }
+    @Test
+    @DisplayName("returns valid position with orientation for Rover2")
+    public void testRover2Position() {
+        Plateau plateau = new Plateau(5,5);
+        Rover rover2 = new Rover(3,3,'E');
+        String rover2Instruction = "MMRMMRMRRM";
+        MotionController motionControllerRover2 = new MotionController(plateau, rover2);
+        Rover rover1Expected = new Rover(5,1,'E');
+        try {
+            Rover rover1Final = motionControllerRover2.executeInstruction(rover2Instruction);
+            assertEquals(rover1Expected.getOrientation(),rover1Final.getOrientation(), "Rover final position mismatch" );
+            assertEquals(rover1Expected.getX(),rover1Final.getX(), "Rover final position mismatch" );
+            assertEquals(rover1Expected.getY(),rover1Final.getY(), "Rover final position mismatch" );
+        } catch (IllegalArgumentException ex) {
+            fail(ex.getMessage());
+        }
+    }
 }
