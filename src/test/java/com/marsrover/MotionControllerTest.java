@@ -224,4 +224,18 @@ class MotionControllerTest {
         assertEquals(rover1Expected.getX(),rover1Final.getX(), "Rover X final position mismatch" );
         assertEquals(rover1Expected.getY(),rover1Final.getY(), "Rover Y final position mismatch" );
     }
+    @Test
+    @DisplayName("returns valid orientation")
+    public void testRoverRightMoveNorthOrientation() {
+        Plateau plateau = new Plateau(5,5);
+        Rover rover1 = new Rover(1,2,'W');
+        String rover1Instruction = "RM";
+        MotionController motionControllerRover1 = new MotionController(plateau, rover1);
+        Rover rover1Expected = new Rover(1,3,'N');
+        Rover rover1Final = motionControllerRover1.executeInstruction(rover1Instruction);
+        assertEquals(rover1Expected.getOrientation(),rover1Final.getOrientation(), "Rover final orientation mismatch" );
+        assertEquals(rover1Expected.getX(),rover1Final.getX(), "Rover X final position mismatch" );
+        assertEquals(rover1Expected.getY(),rover1Final.getY(), "Rover Y final position mismatch" );
+    }
+
 }
