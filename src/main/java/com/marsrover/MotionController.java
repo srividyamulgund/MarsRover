@@ -42,11 +42,14 @@ public class MotionController {
                 if (instruction.charAt(i) == 'L') {
                     if (rover.getOrientation() == 'N') {
                         rover.setOrientation('W');
-                    }else if (rover.getOrientation() == 'E') {
+                    }
+                    else if (rover.getOrientation() == 'E') {
                         rover.setOrientation('N');
-                    }else if(rover.getOrientation()=='W'){
+                    }
+                    else if(rover.getOrientation()=='W'){
                         rover.setOrientation('S');
-                    }else if(rover.getOrientation()=='S'){
+                    }
+                    else if(rover.getOrientation()=='S'){
                         rover.setOrientation('E');
                     }
                 }
@@ -62,6 +65,36 @@ public class MotionController {
                     }
                     else if(rover.getOrientation()=='S'){
                         rover.setOrientation('W');
+                    }
+                }
+                else if(instruction.charAt(i)=='M') {
+                    if(rover.getOrientation() == 'E'){
+                        rover.setX(rover.getX()+1);
+                        rover.setY(rover.getY());
+                        if(!isRoverPositionInBounds(plateau, rover)) {
+                            throw new IllegalArgumentException("Invalid Rover position for the plateau");
+                        }
+                    }
+                    else if (rover.getOrientation() == 'W'){
+                        rover.setX(rover.getX()-1);
+                        rover.setY(rover.getY());
+                        if(!isRoverPositionInBounds(plateau, rover)) {
+                            throw new IllegalArgumentException("Invalid Rover position for the plateau");
+                        }
+                    }
+                    else if (rover.getOrientation() == 'N'){
+                        rover.setX(rover.getX());
+                        rover.setY(rover.getY()+1);
+                        if(!isRoverPositionInBounds(plateau, rover)) {
+                            throw new IllegalArgumentException("Invalid Rover position for the plateau");
+                        }
+                    }
+                    else if (rover.getOrientation() == 'S'){
+                        rover.setX(rover.getX());
+                        rover.setY(rover.getY()-1);
+                        if(!isRoverPositionInBounds(plateau, rover)) {
+                            throw new IllegalArgumentException("Invalid Rover position for the plateau");
+                        }
                     }
                 }
             }
