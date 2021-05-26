@@ -389,14 +389,33 @@ class MotionControllerTest {
     }
 
     @Test
-    @DisplayName("returns valid position with orientation for Rover2")
-    public void testRover1Rover2Position() {
+    @DisplayName("returns collision message")
+    public void testRoversForCollisionOnEastMove() {
         Rover rover1 = new Rover(1,1, "Rover1", 'N');
         Rover rover2 = new Rover(2, 1, "Rover2", 'N');
 
         Plateau plateau = new Plateau(5, 5);
             Plateau.placeRovers(rover1, rover2);
         String rover1Instruction = "RM";
+        MotionController motionControllerRover1 = new MotionController(plateau, rover1);
+
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> motionControllerRover1.executeInstruction(rover1Instruction));
+
+        String expectedMessage = "Rovers colliding for the plateau";
+        String actualMessage = ex.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    @DisplayName("returns collision message")
+    public void testRoversForCollisionOnWestMove() {
+        Rover rover1 = new Rover(2,1, "Rover1", 'N');
+        Rover rover2 = new Rover(1, 1, "Rover2", 'N');
+
+        Plateau plateau = new Plateau(5, 5);
+        Plateau.placeRovers(rover1, rover2);
+        String rover1Instruction = "LM";
         MotionController motionControllerRover1 = new MotionController(plateau, rover1);
 
         Exception ex = assertThrows(IllegalArgumentException.class, () -> motionControllerRover1.executeInstruction(rover1Instruction));
