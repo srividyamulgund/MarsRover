@@ -113,6 +113,9 @@ public class MotionController {
                         if(!isRoverPositionInBounds(plateau, rover)) {
                             throw new IllegalArgumentException("Invalid Rover position for the plateau");
                         }
+                        if(areRoversColliding(plateau, rover)) {
+                            throw new IllegalArgumentException("Rovers colliding for the plateau");
+                        }
                     }
                     else if (rover.getOrientation() == 'S'){
                         rover.setX(rover.getX());
