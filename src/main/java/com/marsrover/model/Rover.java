@@ -14,6 +14,9 @@ public class Rover {
         this.orientation = orientation;
     }
 
+    public Rover() {
+    }
+
     public int getX() {
         return X;
     }

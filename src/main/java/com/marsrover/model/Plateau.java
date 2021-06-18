@@ -1,19 +1,21 @@
 package com.marsrover.model;
 
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Plateau {
     private int x;
     private int y;
+    private static Map<String, Point> roverMap = new HashMap<>();
 
     public static Map<String, Point> getRoverMap() {
+
         return roverMap;
     }
 
-    private static Map<String, Point> roverMap = new HashMap<>();
+    public Plateau() {
+    }
 
     public Plateau(int x, int y) {
         this.x = x;
@@ -25,21 +27,26 @@ public class Plateau {
     }
 
     public void setX(int x) {
+
         this.x = x;
     }
 
     public int getY() {
+
         return y;
     }
 
     public void setY(int y) {
+
         this.y = y;
     }
 
-    public boolean isValidX(int x){
+    public boolean isValidX(int x) {
+
         return x > 0;
     }
     public boolean isValidY(int y) {
+
         return y > 0;
     }
 

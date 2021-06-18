@@ -1,6 +1,16 @@
 plugins {
     id 'java'
 }
+plugins {
+    id 'application'
+}
+apply plugin : "java"
+ext {
+    javaMainClass = "com.marsrover.gradle.exec.Main"
+}
+application {
+    mainClassName = javaMainClass
+}
 
 group 'org.example'
 version '1.0-SNAPSHOT'

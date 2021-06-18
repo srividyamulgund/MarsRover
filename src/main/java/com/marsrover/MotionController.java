@@ -53,12 +53,17 @@ public class MotionController {
             throw new IllegalArgumentException("Invalid Rover position for the plateau");
         }
 
+        if(areRoversColliding(plateau, rover)) {
+            throw new IllegalArgumentException("Rovers colliding for the plateau");
+        }
+
         if (instruction != null) {
             if (!isInstructionValid(instruction)) {
                 throw new IllegalArgumentException("Invalid instruction");
             }
             for(int i = 0; i < instruction.length(); i++) {
                 if (instruction.charAt(i) == 'L') {
+
                     if (rover.getOrientation() == 'N') {
                         rover.setOrientation('W');
                     }
@@ -73,6 +78,7 @@ public class MotionController {
                     }
                 }
                 else if(instruction.charAt(i)=='R') {
+
                     if (rover.getOrientation() == 'N') {
                         rover.setOrientation('E');
                     }
