@@ -17,7 +17,49 @@ degrees left or right respectively, without moving from its current spot.
 'M' means move forward one grid point, and maintain the same heading.
 Assume that the square directly North from (x, y) is (x, y+1).
 
+# Quick start
+This has been created using gradle; to run the tests, just execute:
+```java
+./gradlew test
+```
+or 
+
+(on windows machines):
+```java
+gradlew.bat test
+```
+Use the commandline app
+
+Package the app using:
+```java
+./gradlew build
+```
+# Assumptions and Design 
+
+## Assumptions: 
+
+The rover should always be on the Plateau, which means all the rover can't moved out of Plateau. For example we have the Plateau as (5, 5). One Rover is at (3, 3, N) and its instructions is 'MMMMMRMM'. After it executed the second instruction, it will be at (3, 5, N) and the left instruction is 'MMMRMM'. Now it can't move forward N anymore. So there will be an error thrown out as the instructions cannot be executed on the whole. 
+
+The rover can't be moved to overlap/collide on previous rovers, which means when we have two rovers [(0, 1, N), (0, 0, N)], we can't move the second rover, because there is already one rover at (0, 1) already. So there will be an error thrown out as the instructions cannot be executed on the whole. 
+
+Basically I used OO design for 3 classes: 
+
+Plateau - Used to limit how far away the rovers can move to. Also, it maintains a list of rovers. 
+
+Rover - Rover can turn left, turn right and move forward one step. One rover has no idea of other rover nor plateau. 
+
+MotionController - It's used to connect Plateau and Rovers and parse input instructions to move rover to a destination based on the instruction.
+
+Check if a rover move instruction can be executed, which means a rover can't move out of plateau, nor move to overlap/collide on another rover. MotionController will throw an error out as the instructions cannot be executed on the whole. 
+
+Error handle: 
+When there is input error(the coordinate is negative or decimal, and etc) or logic error(rover was deployed out plateau, and etc.) The code will throw error.
+
+Unit Testing:
+The Red, Green, Refactor approach was followed, as such all of the tests were written first, then ran and broken (Red), then implemented the code / logic (Green) and finally any refactoring that was needed (and could be have been done within the time constraints). Unit Tests are implemented using JUnit. Unit Test cases include testing for valid and invalid inputs and displaying appropriate exceptions for invalid inputs. 
+
 # Input:
+
 The first line of input is the upper-right coordinates of the plateau, the lower-left coordinates are assumed to be 0,0.
 The rest of the input is information pertaining to the rovers that have been deployed. Each rover has two lines of input. The first line gives the
 rover's position, and the second line is a series of instructions telling the rover how to explore the plateau.
@@ -27,12 +69,18 @@ Each rover will be finished sequentially, which means that the second rover won'
 # Output:
 The output for each rover should be its final co-ordinates and heading.
 
-Test Input:
-5 5
-1 2 N 
-LMLMLMLMM 
-3 3 E 
+Test Input: \
+5 5 \
+1 2 N \
+LMLMLMLMM \
+3 3 E \
 MMRMMRMRRM 
-Expected Output: 
-1 3 N
-5 1 E
+
+Expected Output: \
+1 3 N \
+5 1 E 
+
+### To-do:
+
+- Minor refactoring to replace if-else with enums/lambda.
+- Read input from file.
