@@ -4,12 +4,17 @@ public class Rover {
 
     private int X;
     private int Y;
+    private String name;
     private char orientation;
 
-    public Rover(int x, int y, char orientation) {
+    public Rover(int x, int y, String name, char orientation) {
         this.X = x;
         this.Y = y;
+        this.name = name;
         this.orientation = orientation;
+    }
+
+    public Rover() {
     }
 
     public int getX() {
@@ -18,6 +23,14 @@ public class Rover {
 
     public void setX(int x) {
         X = x;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getY() {
